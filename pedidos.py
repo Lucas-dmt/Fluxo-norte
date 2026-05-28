@@ -5,7 +5,7 @@ def cadastrar_pedido():
 
 id_pedido = input("ID do Pedido: ")
         if not id_valido(id_pedido):
-            print("  [ERRO] Formato inválido. Exemplo correto: A1234")
+            print("  [ERRO] Formato inválido")
             erro = True
         elif id_pedido in pedidos:
             print("  [ERRO] Já existe um pedido com esse ID.")
@@ -40,21 +40,18 @@ id_pedido = input("ID do Pedido: ")
                 print("  [ERRO] Descrição não pode ser vazia.")
                 erro = True
 
-    cliente = input("Nome do cliente: ")
-    endereco = input("Endereço de entrega: ")
-    descricao = input("Descrição do produto: ")
 
 status = "Pendente" 
 id_entregador = None  
 
-lista_pedidos[id_pedido,nome,endereco,prioridade,descricao,status,id_entregador] = {
+lista_pedido = {
         "id": id_pedido,
         "cliente": cliente,
         "endereco": endereco,
         "prioridade": prioridade,
         "descricao": descricao,
         "status": status,
-        "id_entregador": id_entregador]
+        "id_entregador": id_entregador
 }
 
   lista_pedidos.append(pedido)
