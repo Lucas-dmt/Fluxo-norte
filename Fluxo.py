@@ -79,6 +79,40 @@ def menu_dos_relatorios():
                 print("Work in progress...")
             case "5":
                 menu_principal()
+def menu_estados():
+    print("\n==== SELECIONE O ESTADO ====")
+    print("1 - Acre (AC)")
+    print("2 - Amapá (AP)")
+    print("3 - Amazonas (AM)")
+    print("4 - Pará (PA)")
+    print("5 - Rondônia (RO)")
+    print("6 - Roraima (RR)")
+    print("7 - Tocantins (TO)")
+
+
+def menu_veiculo():
+    print("\n==== SELECIONE O VEÍCULO ====")
+    print("1 - Moto")
+    print("2 - Carro")
+    print("3 - Van")
+
+
+def menu_regiao():
+    print("\n==== SELECIONE A REGIÃO ====")
+    print("1 - Zona Norte")
+    print("2 - Zona Sul")
+    print("3 - Zona Leste")
+    print("4 - Zona Oeste")
+    print("5 - Centro")
+
+
+def menu_turno():
+    print( "\n==== SELECIONE O TURNO ====")
+    print("1 - Matutino -> (07h às 16h)")
+    print("2 - Vespertino -> (14h às 23h)")
+    print("3 - Noturno -> (23h às 07h)")
+
+
 menu_principal()
 
 pedidos = {}
