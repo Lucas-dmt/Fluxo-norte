@@ -56,3 +56,35 @@ lista_pedido = {
 
   lista_pedidos.append(pedido)
     print(f"Pedido {id_pedido} cadastrado com sucesso!")
+
+MAPA_ESTADOS = {
+    1: "AC",
+    2: "AP",
+    3: "SUL",
+    4: "PA",
+    5: "RO",
+    6: "RR",
+    7: "PARA"
+}
+
+MAPA_REGIÕES = {
+    1: "ZONA NORTE",
+    2: "ZONA SUL",
+    3: "ZONA LESTE",
+    4: "ZONA OESTE",
+    5: "CENTRO"
+}
+
+MAPA_STATUS_PEDIDO = {
+    1: "PENDENTE",
+    2: "EM ROTA",
+    3: "ENTREGUE",
+    4: "CANCELADO",
+    5: "REEMBOLSADO"
+}
+
+MAPA_STATUS_PAGO = {
+    1: "PAGO",
+    2: "NAO PAGO",
+    3: "REEMBOLSADO"
+}
