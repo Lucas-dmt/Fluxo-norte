@@ -1,61 +1,4 @@
-lista_pedidos = []
-
-def cadastrar_pedido():
-    print("\n--- CADASTRO DE PEDIDO ---")
-
-id_pedido = input("ID do Pedido: ")
-        if not id_valido(id_pedido):
-            print("  [ERRO] Formato inválido")
-            erro = True
-        elif id_pedido in pedidos:
-            print("  [ERRO] Já existe um pedido com esse ID.")
-            erro = True
- 
-        if not erro:
-            nome = input("Nome do Cliente: ")
-            if not nome:
-                print("  [ERRO] Nome não pode ser vazio.")
-                erro = True
- 
-        if not erro:
-            endereco = input("Endereço de Entrega: ")
-            if not endereco:
-                print("  [ERRO] Endereço não pode ser vazio.")
-                erro = True
- 
-        if not erro:
-            print("  Prioridade:  1 - Alta   2 - Normal")
-            opcao = input("  Opção: ")
-            if opcao == "1":
-                prioridade = "Alta"
-            elif opcao == "2":
-                prioridade = "Normal"
-            else:
-                print("  [ERRO] Opção inválida.")
-                erro = True
- 
-        if not erro:
-            descricao = input("Descrição do Pedido: ")
-            if not descricao:
-                print("  [ERRO] Descrição não pode ser vazia.")
-                erro = True
-
-
-status = "Pendente" 
-id_entregador = None  
-
-lista_pedido = {
-        "id": id_pedido,
-        "cliente": cliente,
-        "endereco": endereco,
-        "prioridade": prioridade,
-        "descricao": descricao,
-        "status": status,
-        "id_entregador": id_entregador
-}
-
-  lista_pedidos.append(pedido)
-    print(f"Pedido {id_pedido} cadastrado com sucesso!")
+pedidos = {}
 
 MAPA_ESTADOS = {
     1: "AC",
@@ -67,7 +10,7 @@ MAPA_ESTADOS = {
     7: "PARA"
 }
 
-MAPA_REGIÕES = {
+MAPA_REGIOES = {
     1: "ZONA NORTE",
     2: "ZONA SUL",
     3: "ZONA LESTE",
@@ -88,3 +31,189 @@ MAPA_STATUS_PAGO = {
     2: "NAO PAGO",
     3: "REEMBOLSADO"
 }
+
+
+def id_valido(id_pedido):
+
+    return (
+        len(id_pedido) == 5 and
+        id_pedido[0].isalpha() and
+        id_pedido[1:].isdigit()
+    )
+
+
+def cadastrar_pedido():
+
+    print("\n--- CADASTRO DE PEDIDO ---")
+
+    erro = False
+
+    id_pedido = input("ID do Pedido: ").upper()
+
+    if not id_valido(id_pedido):
+        print("[ERRO] Formato inválido")
+        erro = True
+
+    elif id_pedido in pedidos:
+        print("[ERRO] Já existe um pedido com esse ID.")
+        erro = True
+
+    if not erro:
+
+        nome = input("Nome do Cliente: ")
+
+        if not nome:
+            print("[ERRO] Nome não pode ser vazio.")
+            erro = True
+
+    if not erro:
+
+        endereco = input("Endereço de Entrega: ")
+
+        if not endereco:
+            print("[ERRO] Endereço não pode ser vazio.")
+            erro = True
+
+    if not erro:
+
+        print("Prioridade:")
+        print("1 - Alta")
+        print("2 - Normal")
+
+        opcao = input("Opção: ")
+
+        if opcao == "1":
+            prioridade = "Alta"
+
+        elif opcao == "2":
+            prioridade = "Normal"
+
+        else:
+            print("[ERRO] Opção inválida.")
+            erro = True
+
+    if not erro:
+
+        descricao = input("Descrição do Pedido: ")
+
+        if not descricao:
+            print("[ERRO] Descrição não pode ser vazia.")
+            erro = True
+
+    if not erro:
+
+        status = "Pendente"
+        id_entregador = None
+
+        pedido = {
+            "id": id_pedido,
+            "cliente": nome,
+            "endereco": endereco,
+            "prioridade": prioridade,
+            "descricao": descricao,
+            "status": status,
+            "id_entregador": id_entregador
+        }
+
+        pedidos[id_pedido] = pedido
+
+        print(f"Pedido {id_pedido} cadastrado com sucesso!")
+def editar_pedido():
+    print("\n--- EDIÇÃO DE PEDIDO ---")
+
+    erro = False 
+    id_pedido = input("ID do pedido: ").upper()
+    if not id_valido(id_pedido):
+        print("[ERRO] Formato inválido")
+    elif id_pedido not in pedidos:
+        print("[ERRO] Pedido não encontrado")
+        return
+    else:
+        print("\n1 - Endereço")
+        print("2 - Prioridade")
+        print("3 - Status")
+        print("4 - Descrição")
+
+        opcao = input("Escolha: ")
+        match opcao:
+            case "1":
+                novo_endereco = input("Novo endereço: ")
+                if novo_endereco:
+                    pedidos[id_pedido]["endereco"] = novo_endereco
+
+                    print("endereço finalizado com sucesso!")
+                else:
+                    print("[ERRO] Endereço inválido")
+                
+            case "2":
+                print("\n1 - Alta")
+                print("2 - Normal")
+                
+                prioridade = input("Escolha: ")
+
+                if prioridade == "1":
+                    pedidos[id_pedido]["prioridade"] = "Alta"
+                    print("Prioridade atualizada!")
+
+                elif prioridade == "2":
+                    pedidos[id_pedido]["prioridade"] = "Normal"
+                    print("Prioridade atualizada!")
+
+                else:
+                    print("[ERRO] Opção inválida")
+            case "3":
+                print("\n1 - Pendente")
+                print("2 - Em rota")
+                print("3 - Entregue")
+                print("4 - Cancelado")
+
+                status = input("Escolha o status: ")
+                if status == "1":
+                    pedidos[id_pedido]["status"] = "pendente"
+                    print("Status atualizado!")
+                
+                elif status == "2":
+                    pedidos[id_pedido]["status"] = "Em rota"
+                    print("Status atualizado!")
+                
+                elif status == "3":
+                    pedidos[id_pedido]["status"] = "Entregue"
+                    print("Status atualizado!")
+
+                elif status == "4":
+                    pedidos[id_pedido]["status"] = "Cancelado"
+                    print("Status atualizado!")
+
+                else:
+                    print("[ERRO] Opção inválida")
+
+            case "4":
+                nova_descricao = input("Nova descrição: ")
+                if nova_descricao:
+                    pedidos[id_pedido]["descricao"] = nova_descricao
+                    print("Descrição atualizada!")
+                
+                else:
+                    print("[ERRO] Descrição inválida.")
+            case _:
+                print("[ERRO] Opção inválida")
+def remover_pedido():
+    print("\n --- REMOÇÃO DE PEDIDO ---")
+    
+    id_pedido = input("Digite o ID do pedido: ").upper()
+    if not id_valido(id_pedido):
+        print("[ERRO] Formato de ID inválido.")
+        return
+    if id_pedido not in pedidos:
+        print("[ERRO] pedido não encontrado.")
+        return
+    print("\nPedido encontrado: ")
+    print(pedidos[id_pedido])
+
+    confirmacao = input("\nTem certeza que deseja remover? (s/n)").lower()
+
+    if confirmacao == "s":
+        pedidos.pop(id_pedido)
+        print("Pedido removido com sucesso")
+    else:
+        print("Remoção cancelada")

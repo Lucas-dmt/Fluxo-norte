@@ -1,4 +1,7 @@
-
+from entregador import cadastrar_entregador
+from pedidos import cadastrar_pedido, editar_pedido, remover_pedido    
+from menu_auxiliares import limpar
+from dados import entregadores
 def menu_principal():
     opcao = "0"
     while opcao != "4":
@@ -10,6 +13,7 @@ def menu_principal():
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
+                limpar()
                 menu_dos_pedidos()
             case "2":
                 menu_dos_entregadores()
@@ -30,11 +34,14 @@ def menu_dos_pedidos():
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
-                print("Work in progress...")
+                limpar()
+                cadastrar_pedido()
             case "2":
-                print("Work in progress")
+                limpar()
+                editar_pedido()
             case "3":
-                print("Work in progress")
+                limpar()
+                remover_pedido()
             case "4":
                 menu_principal()       
 def menu_dos_entregadores():
@@ -49,7 +56,7 @@ def menu_dos_entregadores():
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
-                print("Work in progress...")
+                cadastrar_entregador()
             case "2":
                 print("Work in progress...")
             case "3":
@@ -115,6 +122,4 @@ def menu_turno():
 
 menu_principal()
 
-pedidos = {}
-entregadores ={}
 
