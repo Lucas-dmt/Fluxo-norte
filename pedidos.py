@@ -243,7 +243,7 @@ def atualizar_pedido():
 
         match opcao:
             case "1":
-            #funcao de alterar status
+            alterar_status(id_pedido)
             case "2":
             #funcao de cancelar pedido
             case "3":
@@ -252,3 +252,35 @@ def atualizar_pedido():
             #funcao de remover a associacao
             case _:
             print("Opcao invalida.")
+
+
+
+def alterar_status(id_pedido):
+    
+    if pedidos[id_pedido]["status"] == "Cancelado":
+        print("Pedido cancelado,alteracao nao pode ser feita.")
+        return
+    if pedidos[id_pedido]["status"] == "Entregue":
+        print("Pedido ja foi entregue.")
+        return
+    
+    print("1 - Pendente")
+    print("2 - A caminho")
+    print("3 - Entregue")
+    opcao = input("Novo status: ")
+    
+    if opcao == "1":
+        pedidos[id_pedido]["status"] = "Pendente"
+    elif opcao == "2":
+        pedidos[id_pedido]["status"] = "A caminho"
+    elif opcao == "3":
+        pedidos[id_pedido]["status"] = "Entregue"
+        if pedidos[id_pedido]["id_entregador"]:
+            entregadores[pedidos[id_pedido]["id_entregador"]]["disponivel"] = True
+    else:
+        print("Opcao invalida.")
+        return
+    print("Status do pedido atualizado")
+
+
+
