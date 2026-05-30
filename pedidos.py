@@ -218,5 +218,32 @@ def remover_pedido():
     else:
         print("Remoção cancelada")
 
+def relatorio_total_pedidos():
+    print("\n===== TOTAL DE PEDIDOS =====")
+    print(f"Total: {len(pedidos)}")
 
+
+
+def relatorio_pedidos_por_status():
+    
+    print("\n===== PEDIDOS POR STATUS =====")
+    pendente = 0
+    em_rota = 0
+    entregue = 0
+    cancelado = 0
+    
+    for id_pedido in pedidos:
+        if pedidos[id_pedido]["status"] == "Pendente":
+            pendente += 1
+        elif pedidos[id_pedido]["status"] == "Em Rota":
+            em_rota += 1
+        elif pedidos[id_pedido]["status"] == "Entregue":
+            entregue += 1
+        elif pedidos[id_pedido]["status"] == "Cancelado":
+            cancelado += 1
+    
+    print(f"Pendente:  {pendente}")
+    print(f"Em Rota:   {em_rota}")
+    print(f"Entregue:  {entregue}")
+    print(f"Cancelado: {cancelado}")
 
