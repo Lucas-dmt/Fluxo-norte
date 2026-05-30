@@ -1,4 +1,4 @@
-from entregador import cadastrar_entregador, listar_entregadores
+from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos
 from pedidos import cadastrar_pedido, editar_pedido, remover_pedido,relatorio_pedidos_por_status,relatorio_total_pedidos  
 from menu_auxiliares import limpar
 from dados import entregadores
@@ -63,7 +63,7 @@ def menu_dos_entregadores():
                 listar_entregadores()
             case "3":
                 limpar()
-                print("Work in progress...")
+                associar_pedidos()
             case "4":
                 limpar()
                 print("Work in progress...")
@@ -82,8 +82,10 @@ def menu_dos_relatorios():
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
+                limpar()
                 relatorio_total_pedidos()
             case "2":
+                limpar()
                 relatorio_pedidos_por_status()
             case "3":
                 print("Work in progress...")

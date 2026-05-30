@@ -1,5 +1,6 @@
-from dados import  entregadores
+from dados import  entregadores, pedidos
 from menu_auxiliares import menu_turno, menu_veiculo
+from pedidos import pegar_proximo_pedido
 def cadastrar_entregador():
     print("\n===== CADASTRAR ENTREGADOR =====")
 
@@ -70,6 +71,42 @@ def listar_entregadores():
             print("\nID:", id_entregador)
             print("Nome: ", entregadores[id_entregador]["nome"])
             print("Veículo: ", entregadores[id_entregador]["veiculo"])
+            print("Disponibilidade: ", entregadores[id_entregador]["disponibilidade"])
 
-    
-    
+def associar_pedidos():
+    print("\n==== ASSOCIAR PEDIDOS ====")
+
+    if len(pedidos) == 0:
+        print("Não há pedidos cadastrados")
+        return
+
+    if len(entregadores) == 0:
+        print("Não há entregadores cadastrados")
+        return
+
+    id_pedido = pegar_proximo_pedido()
+
+    if not id_pedido:
+        print("Não há pedidos pendentes.")
+        return
+
+    if pedidos[id_pedido]["id_entregador"] != "":
+        print("[ERRO] Pedido já está associado.")
+        return
+
+    print("Pedido selecionado automaticamente:", id_pedido)
+
+    id_entregador = input("ID do entregador: ").upper()
+
+    if id_entregador not in entregadores:
+        print("[ERRO] Entregador não encontrado.")
+        return
+
+    if len(entregadores[id_entregador]["pedidos"]) >= 2:
+        print("[ERRO] Este entregador já possui o limite de 2 pedidos.")
+        return
+
+    entregadores[id_entregador]["pedidos"].append(id_pedido)
+    pedidos[id_pedido]["id_entregador"] = id_entregador
+
+    print("Pedido associado com sucesso!")

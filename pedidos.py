@@ -1,4 +1,4 @@
-pedidos = {}
+from dados import pedidos,estado
 
 MAPA_ESTADOS = {
     1: "AC",
@@ -103,7 +103,7 @@ def cadastrar_pedido():
     if not erro:
 
         status = "Pendente"
-        id_entregador = None
+        id_entregador = ""
 
         pedido = {
             "id": id_pedido,
@@ -112,7 +112,8 @@ def cadastrar_pedido():
             "prioridade": prioridade,
             "descricao": descricao,
             "status": status,
-            "id_entregador": id_entregador
+            "id_entregador": id_entregador,
+            "ordem": estado["contador_pedidos"]
         }
 
         pedidos[id_pedido] = pedido
@@ -246,4 +247,30 @@ def relatorio_pedidos_por_status():
     print(f"Em Rota:   {em_rota}")
     print(f"Entregue:  {entregue}")
     print(f"Cancelado: {cancelado}")
+
+def pegar_proximo_pedido():
+
+    melhor_id = ""
+
+    for id_pedido in pedidos:
+
+        p = pedidos[id_pedido]
+
+        if p["id_entregador"] == "":
+
+            if melhor_id == "":
+                melhor_id = id_pedido
+
+            else:
+                atual = pedidos[melhor_id]
+
+                if p["prioridade"] == "Alta" and atual["prioridade"] != "Alta":
+                    melhor_id = id_pedido
+
+                elif p["prioridade"] == atual["prioridade"]:
+                    if p["ordem"] < atual["ordem"]:
+                        melhor_id = id_pedido
+
+    return melhor_id
+
 
