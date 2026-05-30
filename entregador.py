@@ -58,4 +58,18 @@ def cadastrar_entregador():
 
     }
     print(f"Entregador {nome} cadastrado com sucesso")
+def listar_entregadores():
+
+    print("\n==== LISTA DE ENTREGADORES ====")
+    
+    if len(entregadores) == 0:
+        print("Nenhum entregador cadastrado")
+        return
+    else:
+        for id_entregador in entregadores:
+            print("\nID:", id_entregador)
+            print("Nome: ", entregadores[id_entregador]["nome"])
+            print("Veículo: ", entregadores[id_entregador]["veiculo"])
+
+    
     
