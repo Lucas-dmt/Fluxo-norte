@@ -217,3 +217,38 @@ def remover_pedido():
         print("Pedido removido com sucesso")
     else:
         print("Remoção cancelada")
+
+
+
+def atualizar_pedido():
+    print(" ===== ATUALIZAÇÃO DE PEDIDO =====")
+    
+    id_pedido = input("ID do Pedido: ")
+    if id_pedido not in pedidos:
+        print("Pedido nao encontrado.")
+        return
+    else:
+    
+        pedido = pedidos[id_pedido]
+        print(f"Pedido encontrado:")
+        print(f"Cliente: {pedido['cliente']}")
+        print(f"Status atual: {pedido['status']}")
+        print(f"Entregador: {pedido['id_entregador']}")
+    
+        print("1 - Alterar status")
+        print("2 - Cancelar pedido")
+        print("3 - Associar entregador")
+        print("4 - Remover entregador")
+        opcao = input("Opcao: ")
+
+        match opcao:
+            case "1":
+            #funcao de alterar status
+            case "2":
+            #funcao de cancelar pedido
+            case "3":
+            #funcao de associar entregador
+            case "4":
+            #funcao de remover a associacao
+            case _:
+            print("Opcao invalida.")
