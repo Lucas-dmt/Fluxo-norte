@@ -16,10 +16,13 @@ def menu_principal():
                 limpar()
                 menu_dos_pedidos()
             case "2":
+                limpar()
                 menu_dos_entregadores()
             case "3":
+                limpar()
                 menu_dos_relatorios()
             case "4":
+                limpar()
                 print("Saindo do sistema...")
             case _:
                 print("opção inválida")
@@ -51,17 +54,11 @@ def menu_dos_pedidos():
                 limpar()
                 listar_pedidos()
             case "6":
-                limpar()
-                listar_pedidos_pendentes()
-            case "7":
-                limpar()
-                listar_entregas_por_entregador()
-            case "6":
                 break       
 
 def menu_dos_entregadores():
     opcao = "0"
-    while opcao != "6   ":
+    while opcao != "6":
         print("\n==== ENTREGADORES ==== ")
         print("1 - Cadastrar entregador")
         print("2 - Listar entregadores")
@@ -87,17 +84,18 @@ def menu_dos_entregadores():
                 limpar()
                 entregadores_disponiveis()
             case "6":
-                limpar()
-                menu_principal()
+                break
 def menu_dos_relatorios():
     opcao = "0"
-    while opcao != "5":
+    while opcao != "7":
         print("\n==== RELATÓRIO ====")
         print("1 - Total de pedidos")
         print("2 - Pedidos por status")
-        print("3 - Pedidos de Alta prioridade")
-        print("4 - Entregador com mais entregas")
-        print("5 - Voltar")
+        print("3 - Pedidos pendentes")
+        print("4 - Pedidos de Alta prioridade")
+        print("5 - Entregador com mais entregas")
+        print("6 - Entregas por entregador")
+        print("7 - Voltar")
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
@@ -108,10 +106,16 @@ def menu_dos_relatorios():
                 relatorio_pedidos_por_status()
             case "3":
                 limpar()
-                relatorio_pedidos_alta_prioridade()
+                listar_pedidos_pendentes()    
             case "4":
                 limpar()
-                relatorio_entregador_mais_entregas()
+                relatorio_pedidos_alta_prioridade()
             case "5":
-                menu_principal()
+                limpar()
+                relatorio_entregador_mais_entregas()
+            case "6":
+                limpar()
+                listar_entregas_por_entregador()
+            case "7":
+                break
 menu_principal()

@@ -139,6 +139,10 @@ def editar_pedido():
                 else:
                     print("[ERRO] Opção inválida")
             case "3":
+                if pedidos[id_pedido]["status"] == "Cancelado":
+                    print("[ERRO] Pedido cancelado não pode ser reativado.")
+                    return
+
                 print("\n1 - Pendente")
                 print("2 - Em rota")
                 print("3 - Entregue")
