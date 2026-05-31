@@ -66,9 +66,9 @@ def menu_das_consultas():
         opcao = input("Escolha uma opção: ")
         match opcao:
             case "1": buscar_pedido_por_id()
-            case "2": listar_pedidos_pendentes()
+            case "2": #listar_pedidos_pendentes()
             case "3": listar_pedidos_entregues()
-            case "4": listar_entregadores_disponiveis()
-            case "5": listar_entregas_por_entregador()
+            case "4": #listar_entregadores_disponiveis()
+            case "5": #listar_entregas_por_entregador()
             case "6": pass
             case _: print("opcao invalida") 
