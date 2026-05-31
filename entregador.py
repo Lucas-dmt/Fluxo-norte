@@ -147,6 +147,25 @@ def remocao_associacao():
 
     print("Associação removida com sucesso.")
 
+def entregadores_disponiveis():
+
+    print("\n=== ENTREGADORES DISPONÍVEIS ===")
+
+    encontrou = False
+
+    for id_entregador in entregadores:
+
+        if len(entregadores[id_entregador]["pedidos"]) < 2:
+
+            encontrou = True
+
+            print("\nID:", id_entregador)
+            print("Nome:", entregadores[id_entregador]["nome"])
+            print("Veículo:", entregadores[id_entregador]["veiculo"])
+
+    if not encontrou:
+        print("Nenhum entregador disponível.")
+
 
     
     
