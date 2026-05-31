@@ -1,5 +1,5 @@
 from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos, remocao_associacao, entregadores_disponiveis
-from pedidos import cadastrar_pedido, editar_pedido, remover_pedido,relatorio_pedidos_por_status,relatorio_total_pedidos  , relatorio_pedidos_alta_prioridade, relatorio_entregador_mais_entregas, listar_pedidos, buscar_pedido
+from pedidos import cadastrar_pedido, editar_pedido, remover_pedido, relatorio_pedidos_por_status, relatorio_total_pedidos, relatorio_pedidos_alta_prioridade, relatorio_entregador_mais_entregas, listar_pedidos, buscar_pedido, listar_pedidos_pendentes, listar_entregas_por_entregador
 from menu_auxiliares import limpar
 from dados import entregadores
 def menu_principal():
@@ -51,7 +51,14 @@ def menu_dos_pedidos():
                 limpar()
                 listar_pedidos()
             case "6":
-                menu_principal()       
+                limpar()
+                listar_pedidos_pendentes()
+            case "7":
+                limpar()
+                listar_entregas_por_entregador()
+            case "6":
+                break       
+
 def menu_dos_entregadores():
     opcao = "0"
     while opcao != "6   ":

@@ -93,6 +93,7 @@ def editar_pedido():
     id_pedido = input("ID do pedido: ").upper()
     if not id_valido(id_pedido):
         print("[ERRO] Formato inválido")
+        return
     elif id_pedido not in pedidos:
         print("[ERRO] Pedido não encontrado")
         return
@@ -117,7 +118,7 @@ def editar_pedido():
                 if novo_endereco:
                     pedidos[id_pedido]["endereco"] = novo_endereco
 
-                    print("endereço finalizado com sucesso!")
+                    print("endereço atualizado com sucesso!")
                 else:
                     print("[ERRO] Endereço inválido")
                 
@@ -153,7 +154,7 @@ def editar_pedido():
                         print("[ERRO] O pedido precisa ter um entregador associado")
                     else:
                         pedidos[id_pedido]["status"] = "Em rota"
-
+                        print("Status atualizado!")
                 elif status == "3":
                     pedidos[id_pedido]["status"] = "Entregue"
                     print("Status atualizado!")
@@ -342,7 +343,7 @@ def buscar_pedido():
     id_pedido = input("ID do pedido: ").upper()
 
     if id_pedido not in pedidos:
-        print("[ERRO] Pedido não encontrado.")
+        print("Pedido não encontrado.")
         return
 
     print("\n=== DADOS DO PEDIDO ===")
@@ -357,6 +358,56 @@ def buscar_pedido():
         print("Entregador:", pedidos[id_pedido]["id_entregador"])
     else:
         print("Entregador: Não associado")
+
+
+def listar_pedidos_pendentes():
+    print("\n==== PEDIDOS PENDENTES ====")
+
+    if len(pedidos) == 0:
+        print("Nao há pedidos cadastrados.")
+        return
+
+    for id_pedido in pedidos:
+        if pedidos[id_pedido]["status"] == "Pendente":
+            print("ID:", id_pedido)
+            print("Cliente:", pedidos[id_pedido]["cliente"])
+            print("Endereço:", pedidos[id_pedido]["endereco"])
+            print("Prioridade:", pedidos[id_pedido]["prioridade"])
+            print("Descrição:", pedidos[id_pedido]["descricao"])
+            print("Status:", pedidos[id_pedido]["status"])
+
+            if pedidos[id_pedido]["id_entregador"] != "":
+                print("Entregador:", pedidos[id_pedido]["id_entregador"])
+            else:
+                print("Entregador nao associado")
+
+
+def listar_entregas_por_entregador():
+    print("\n==== ENTREGAS POR ENTREGADOR ====")
+
+    if len(pedidos) == 0:
+        print("Nao há pedidos cadastrados.")
+        return
+
+    if len(entregadores) == 0:
+        print("Nao há entregadores cadastrados.")
+        return
+
+    id_entregador = input("ID do entregador: ")
+
+    if id_entregador not in entregadores:
+        print("Entregador nao encontrado.")
+        return
+
+    print("\nEntregador:", entregadores[id_entregador]["nome"])
+
+    for id_pedido in pedidos:
+        if pedidos[id_pedido]["id_entregador"] == id_entregador:
+            print("ID:", id_pedido)
+            print("Cliente:", pedidos[id_pedido]["cliente"])
+            print("Endereço:", pedidos[id_pedido]["endereco"])
+            print("Prioridade:", pedidos[id_pedido]["prioridade"])
+            print("Status:", pedidos[id_pedido]["status"])
 
 
 
