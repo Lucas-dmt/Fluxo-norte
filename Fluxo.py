@@ -1,4 +1,4 @@
-from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos, remocao_associacao
+from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos, remocao_associacao, entregadores_disponiveis
 from pedidos import cadastrar_pedido, editar_pedido, remover_pedido,relatorio_pedidos_por_status,relatorio_total_pedidos  , relatorio_pedidos_alta_prioridade, relatorio_entregador_mais_entregas, listar_pedidos, buscar_pedido
 from menu_auxiliares import limpar
 from dados import entregadores
@@ -54,13 +54,14 @@ def menu_dos_pedidos():
                 menu_principal()       
 def menu_dos_entregadores():
     opcao = "0"
-    while opcao != "5":
+    while opcao != "6   ":
         print("\n==== ENTREGADORES ==== ")
         print("1 - Cadastrar entregador")
         print("2 - Listar entregadores")
         print("3 - Associar pedido")
         print("4 - Remover associação")
-        print("5 - Voltar")
+        print("5 - Entregadores disponíveis")
+        print("6 - Voltar")
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
@@ -76,6 +77,9 @@ def menu_dos_entregadores():
                 limpar()
                 remocao_associacao()
             case "5":
+                limpar()
+                entregadores_disponiveis()
+            case "6":
                 limpar()
                 menu_principal()
 def menu_dos_relatorios():
