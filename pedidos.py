@@ -121,8 +121,7 @@ def cadastrar_pedido():
         print(f"Pedido {id_pedido} cadastrado com sucesso!")
 def editar_pedido():
     print("\n--- EDIÇÃO DE PEDIDO ---")
-
-    erro = False 
+ 
     id_pedido = input("ID do pedido: ").upper()
     if not id_valido(id_pedido):
         print("[ERRO] Formato inválido")
@@ -130,6 +129,14 @@ def editar_pedido():
         print("[ERRO] Pedido não encontrado")
         return
     else:
+        print("\n=== DADOS ATUAIS DO PEDIDO ===")
+        print("Cliente:", pedidos[id_pedido]["cliente"])
+        print("Endereço:", pedidos[id_pedido]["endereco"])
+        print("Prioridade:", pedidos[id_pedido]["prioridade"])
+        print("Descrição:", pedidos[id_pedido]["descricao"])
+        print("Status:", pedidos[id_pedido]["status"])
+
+        print("\n=== EDITAR O PEDIDO ===")
         print("\n1 - Endereço")
         print("2 - Prioridade")
         print("3 - Status")
@@ -170,7 +177,7 @@ def editar_pedido():
 
                 status = input("Escolha o status: ")
                 if status == "1":
-                    pedidos[id_pedido]["status"] = "pendente"
+                    pedidos[id_pedido]["status"] = "Pendente"
                     print("Status atualizado!")
                 
                 elif status == "2":
