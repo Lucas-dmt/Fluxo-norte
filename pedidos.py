@@ -84,6 +84,7 @@ def cadastrar_pedido():
         }
 
         pedidos[id_pedido] = pedido
+        estado["contador_pedidos"] += 1
 
         print(f"Pedido {id_pedido} cadastrado com sucesso!")
 def editar_pedido():
@@ -190,6 +191,15 @@ def remover_pedido():
     confirmacao = input("\nTem certeza que deseja remover? (s/n)").lower()
 
     if confirmacao == "s":
+        if pedidos[id_pedido]["id_entregador"] != "":
+
+         id_entregador = pedidos[id_pedido]["id_entregador"]
+
+        for i in range(len(entregadores[id_entregador]["pedidos"])):
+
+            if entregadores[id_entregador]["pedidos"][i] == id_pedido:
+                entregadores[id_entregador]["pedidos"].pop(i)
+                break
         pedidos.pop(id_pedido)
         print("Pedido removido com sucesso")
     else:
@@ -220,7 +230,7 @@ def relatorio_pedidos_por_status():
             cancelado += 1
     
     print(f"Pendente:  {pendente}")
-    print(f"Em Rota:   {em_rota}")
+    print(f"Em rota:   {em_rota}")
     print(f"Entregue:  {entregue}")
     print(f"Cancelado: {cancelado}")
 
