@@ -73,6 +73,7 @@ def listar_entregadores():
             print("Nome: ", entregadores[id_entregador]["nome"])
             print("Veículo: ", entregadores[id_entregador]["veiculo"])
             print("Disponibilidade: ", entregadores[id_entregador]["disponibilidade"])
+            print("Pedidos:", entregadores[id_entregador]["pedidos"])
 
 def associar_pedidos():
     print("\n==== ASSOCIAR PEDIDOS ====")
@@ -140,6 +141,7 @@ def remocao_associacao():
         if entregadores[id_entregador]["pedidos"][i] == id_pedido:
             entregadores[id_entregador]["pedidos"].pop(i)
             break
+
     pedidos[id_pedido]["id_entregador"] = ""
     pedidos[id_pedido]["status"] = "Pendente"
 
