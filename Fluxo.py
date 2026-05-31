@@ -1,5 +1,5 @@
-from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos
-from pedidos import cadastrar_pedido, editar_pedido, remover_pedido,relatorio_pedidos_por_status,relatorio_total_pedidos  
+from entregador import cadastrar_entregador, listar_entregadores, associar_pedidos, remocao_associacao, entregadores_disponiveis
+from pedidos import cadastrar_pedido, editar_pedido, remover_pedido,relatorio_pedidos_por_status,relatorio_total_pedidos  , relatorio_pedidos_alta_prioridade, relatorio_entregador_mais_entregas, listar_pedidos, buscar_pedido
 from menu_auxiliares import limpar
 from dados import entregadores
 def menu_principal():
@@ -7,7 +7,7 @@ def menu_principal():
     while opcao != "4":
         print("\n ==== Fluxo Norte ====")
         print("1 - Pedidos")
-        print("2 - Listar Entregadores")
+        print("2 - Entregadores")
         print("3 - Gerar relatório")
         print("4 - Sair do sistema")
         opcao = input("Escolha uma opção:")
@@ -25,12 +25,14 @@ def menu_principal():
                 print("opção inválida")
 def menu_dos_pedidos():
     opcao = "0"
-    while opcao != "4":
+    while opcao != "6":
         print("\n==== PEDIDOS ====")
         print("1 - Fazer pedido")
-        print("2 - Editar pedido")
-        print("3 - Remover pedido")
-        print("4 - Voltar para o menu principal")
+        print("2 - Buscar pedido")
+        print("3 - Editar pedido")
+        print("4 - Remover pedido")
+        print("5 - Listar pedidos")
+        print("6 - Voltar para o menu principal")
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
@@ -38,21 +40,28 @@ def menu_dos_pedidos():
                 cadastrar_pedido()
             case "2":
                 limpar()
-                editar_pedido()
+                buscar_pedido()
             case "3":
                 limpar()
-                remover_pedido()
+                editar_pedido()
             case "4":
+                limpar()
+                remover_pedido()
+            case "5":
+                limpar()
+                listar_pedidos()
+            case "6":
                 menu_principal()       
 def menu_dos_entregadores():
     opcao = "0"
-    while opcao != "5":
+    while opcao != "6   ":
         print("\n==== ENTREGADORES ==== ")
         print("1 - Cadastrar entregador")
         print("2 - Listar entregadores")
         print("3 - Associar pedido")
         print("4 - Remover associação")
-        print("5 - Voltar")
+        print("5 - Entregadores disponíveis")
+        print("6 - Voltar")
         opcao = input("Escolha uma opção:")
         match opcao:
             case "1":
@@ -66,8 +75,11 @@ def menu_dos_entregadores():
                 associar_pedidos()
             case "4":
                 limpar()
-                print("Work in progress...")
+                remocao_associacao()
             case "5":
+                limpar()
+                entregadores_disponiveis()
+            case "6":
                 limpar()
                 menu_principal()
 def menu_dos_relatorios():
@@ -88,23 +100,11 @@ def menu_dos_relatorios():
                 limpar()
                 relatorio_pedidos_por_status()
             case "3":
-                print("Work in progress...")
+                limpar()
+                relatorio_pedidos_alta_prioridade()
             case "4":
-                print("Work in progress...")
+                limpar()
+                relatorio_entregador_mais_entregas()
             case "5":
                 menu_principal()
-
-def menu_veiculo():
-    print("\n==== SELECIONE O VEÍCULO ====")
-    print("1 - Moto")
-    print("2 - Carro")
-    print("3 - Van")
-
-def menu_turno():
-    print( "\n==== SELECIONE O TURNO ====")
-    print("1 - Matutino -> (07h às 16h)")
-    print("2 - Vespertino -> (14h às 23h)")
-    print("3 - Noturno -> (23h às 07h)")
 menu_principal()
-
-

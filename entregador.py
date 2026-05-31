@@ -11,7 +11,7 @@ def cadastrar_entregador():
         return
     
     if id_entregador in entregadores:
-        print("Entregador ja esta cadastrado")
+        print("[ERRO] Já existe um entregador com esse ID.")
         return
     
     nome = input ("Nome do Entregador:")
@@ -52,13 +52,14 @@ def cadastrar_entregador():
     "id":id_entregador,
     "nome":nome,
     "veiculo": veiculo,
-    "turno":turno,
+    "disponibilidade":turno,
     "disponivel": True,
     "pedidos":[]
 
 
     }
     print(f"Entregador {nome} cadastrado com sucesso")
+
 def listar_entregadores():
 
     print("\n==== LISTA DE ENTREGADORES ====")
@@ -72,6 +73,7 @@ def listar_entregadores():
             print("Nome: ", entregadores[id_entregador]["nome"])
             print("Veículo: ", entregadores[id_entregador]["veiculo"])
             print("Disponibilidade: ", entregadores[id_entregador]["disponibilidade"])
+            print("Pedidos:", entregadores[id_entregador]["pedidos"])
 
 def associar_pedidos():
     print("\n==== ASSOCIAR PEDIDOS ====")
@@ -96,6 +98,13 @@ def associar_pedidos():
 
     print("Pedido selecionado automaticamente:", id_pedido)
 
+    print("\n=== DADOS ATUAIS DO PEDIDO ===")
+    print("Cliente:", pedidos[id_pedido]["cliente"])
+    print("Endereço:", pedidos[id_pedido]["endereco"])
+    print("Prioridade:", pedidos[id_pedido]["prioridade"])
+    print("Descrição:", pedidos[id_pedido]["descricao"])
+    print("Status:", pedidos[id_pedido]["status"])
+
     id_entregador = input("ID do entregador: ").upper()
 
     if id_entregador not in entregadores:
@@ -107,6 +116,57 @@ def associar_pedidos():
         return
 
     entregadores[id_entregador]["pedidos"].append(id_pedido)
+
     pedidos[id_pedido]["id_entregador"] = id_entregador
+    pedidos[id_pedido]["status"] = "Em rota"
 
     print("Pedido associado com sucesso!")
+
+def remocao_associacao():
+    print("\n=== REMOVER ASSOCIAÇÃO ===")
+
+    id_pedido = input("ID do pedido: ").upper()
+
+    if id_pedido not in pedidos:
+        print("[ERRO] pedido não encontrando.")
+        return
+    
+    if pedidos[id_pedido]["id_entregador"] == "":
+        print("[ERRO] Esse pedido não possui entregador associado.")
+        return
+    
+    id_entregador = pedidos[id_pedido]["id_entregador"]
+
+    for i in range (len(entregadores[id_entregador]["pedidos"])):
+        if entregadores[id_entregador]["pedidos"][i] == id_pedido:
+            entregadores[id_entregador]["pedidos"].pop(i)
+            break
+
+    pedidos[id_pedido]["id_entregador"] = ""
+    pedidos[id_pedido]["status"] = "Pendente"
+
+    print("Associação removida com sucesso.")
+
+def entregadores_disponiveis():
+
+    print("\n=== ENTREGADORES DISPONÍVEIS ===")
+
+    encontrou = False
+
+    for id_entregador in entregadores:
+
+        if len(entregadores[id_entregador]["pedidos"]) < 2:
+
+            encontrou = True
+
+            print("\nID:", id_entregador)
+            print("Nome:", entregadores[id_entregador]["nome"])
+            print("Veículo:", entregadores[id_entregador]["veiculo"])
+
+    if not encontrou:
+        print("Nenhum entregador disponível.")
+
+
+    
+    
+    
