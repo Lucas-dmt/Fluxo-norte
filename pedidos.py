@@ -195,7 +195,7 @@ def remover_pedido():
 
          id_entregador = pedidos[id_pedido]["id_entregador"]
 
-        for i in range(len(entregadores[id_entregador]["pedidos"])):
+         for i in range(len(entregadores[id_entregador]["pedidos"])):
 
             if entregadores[id_entregador]["pedidos"][i] == id_pedido:
                 entregadores[id_entregador]["pedidos"].pop(i)
@@ -259,26 +259,35 @@ def relatorio_pedidos_alta_prioridade():
 
 def relatorio_entregador_mais_entregas():
 
-    print(" \n=== ENTREGADOR COM MAIS ENTREGAS ===")
+    print("\n=== ENTREGADOR COM MAIS ENTREGAS ===")
 
     if len(entregadores) == 0:
         print("Não há entregadores cadastrados")
         return
-    
+
     maior = -1
     id_maior = ""
 
     for id_entregador in entregadores:
 
-        quantidade = len(entregadores[id_entregador]["pedidos"])
+        quantidade = 0
+
+        for id_pedido in pedidos:
+
+            if (
+                pedidos[id_pedido]["id_entregador"] == id_entregador
+                and pedidos[id_pedido]["status"] == "Entregue"
+            ):
+                quantidade += 1
 
         if quantidade > maior:
             maior = quantidade
             id_maior = id_entregador
-    
-    print("ID: ", id_maior)
-    print("Nome: ", entregadores[id_maior]["nome"])
-    print("Quantidade de entregas ", maior )
+
+    if id_maior != "":
+        print("ID:", id_maior)
+        print("Nome:", entregadores[id_maior]["nome"])
+        print("Entregas realizadas:", maior)
 
 
 def pegar_proximo_pedido():
