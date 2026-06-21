@@ -2,4 +2,4 @@
 
 # Como executar
 Clonar o repositório
-Executar main.py em um terminal
+ E executar fluxo.py em um terminal
